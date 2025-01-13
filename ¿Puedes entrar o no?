@@ -1,0 +1,24 @@
+#Si la edad del Usuario es igual o mayor a 21, puede pasar al club, de lo contrario, no puede pasar
+def can_enter_club(edad):
+    if edad >= 21:
+        return "Podes pasar"
+    else:
+        return "No podes pasar"
+
+#Pregunta que edad tiene el Usuario
+def ingresar_edad():
+    while True:
+        try:
+            edad = int(input("Ingresa tu edad (entre 0 y 100): "))
+            if 0 <= edad <= 100:
+                return edad
+            else: print("La edad que ingresaste no es correcta, por favor ingresa un numero entre 0 y 100: ")
+        except ValueError:
+            print("Por favor, ingresa un número válido.")
+
+edad = ingresar_edad()
+
+#Le dice al Usuario si puede pasar o no
+
+resultado = can_enter_club(edad)
+print(resultado)
