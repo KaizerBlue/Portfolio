@@ -1,0 +1,101 @@
+
+print("""¡BIENVENIDO A LA PIZZERIA SANTA MARIA!
+    Jugaremos a repartir pizzas
+      """) # Mensaje de bienvenida.
+
+def volver_a_jugar(): # Si el usuario termina la primera vuelta y quiere volver a jugar, se ejecutara esta funcion.
+        global pizzas
+        print(" ")
+        print("CARGANDO PIZZAS...")
+        pizzas = 10
+
+def start(): # Inicio del programa, pregunta al usuario si acepta el "trabajo", si elige que si comienza la funcion motoneta(), si elige que no, se cierra el programa.
+    global pizzas
+    try:
+        desempleado = input("""Te han contratado como repartidor de pizzas, aceptas el trabajo? Y/N: """).lower()
+        if desempleado == "y":
+            print("""
+                  ¡COMENZEMOS!
+                  """)
+            print("CARGANDO PIZZAS...")
+            pizzas = 10
+
+        if desempleado == "n":
+            print("""
+                  ¡Te han despedido por vago!
+                  """)
+            exit()
+    except ValueError: 
+        print("¡ERROR! ELIGE ENTRE Y / N")
+
+
+def motoneta(): # El usuario podra elegir si quiere entregar o no la pizza, si la entrega, se descontara 1 del total de pizzas.
+    global pizzas
+    print("""ARRANCANDO LA MOTO... VIAJANDO...
+          """)
+    repartir = input("¡Has llegado a tu destino! ¿Deseas entregar la pizza? Y/N: ").lower()
+    if repartir == "y":
+        pizzas -= 1
+        print(" ")
+        print("""
+              ¡Has entregado 1 pizza!
+              """)
+        print(" ")
+        cuantas_quedan()
+        return True
+    elif repartir == "n":
+        print("""
+              Has decidido no entregar la pizza
+              """)
+        return True
+
+def cuantas_quedan(): # Funcion que preguntara al usuario si desea ver cuantas pizzas le quedan.
+    global pizzas
+    saber_cuantas_quedan = input("¿Deseas revisar cuantas pizzas te quedan? Y/N: ").lower()
+    print(" ")
+    if saber_cuantas_quedan == "y":
+        print("Revisando la caja...")
+        print("Te quedan",pizzas,"pizzas.")
+        print("CONTINUANDO...")
+        print(" ")
+
+def main():
+    global pizzas
+    print(" ")
+    while pizzas > 0:
+        if not motoneta():
+            decision = input("¡Has entregado todas las pizzas! ¿Deseas volver al local por más pizzas? Y/N: ").lower()
+            if decision == "y":
+                pizzas = 10
+                print("""
+                      ¡Volviendo al local por más pizzas!
+                      """)
+            elif decision == "n":
+                print("""
+                      ¡Terminaste de repartir las 10 pizzas!
+                      """)
+                break
+            else:
+                print(" ")
+                print("¡ERROR! ELIGE Y / N")
+    else:
+        print("""
+              ¡Te quedaste sin pizzas!
+              """)
+        decision = input("¿Deseas volver al local por más pizzas? Y/N: ").lower()
+        if decision == "y":
+            print(" ")
+            print("""
+                  ¡Volviendo al local por más pizzas!
+                  """)
+            volver_a_jugar()
+            main()
+        elif decision == "n":
+            print("""
+                  ¡Terminaste de repartir las 10 pizzas!
+                  """)
+        else:
+            print(" ")
+            print("¡ERROR! ELIGE Y / N")
+start()
+main()
