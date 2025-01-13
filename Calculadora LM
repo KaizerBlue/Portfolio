@@ -1,0 +1,298 @@
+import tkinter
+import math
+# Le pedira al usuario dos numeros para realizar alguna operacion.
+def ingresar_numeros():
+    global numero1,numero2
+    numero1 = int(input("Ingrese un numero: "))
+    numero2 = int(input("Ingrese otro numero: "))
+
+# Preguntara al usuario si realmente quiere salir de la calculadora. Responde con Y(yes) / N(no)
+def salida_confirmacion():
+    try:
+        salida = input("Esta seguro/a que desea salir de la calculadora? Y/N: ").lower()
+        if salida == "y":
+            return True
+        elif salida == "n":
+            return False
+    except ValueError:
+        print("¡ERROR!, ELIGE Y (yes) / N (no)")
+
+# A cada operación que el usuario quiera realizar, tendra un mensaje de confirmacion.
+def usuario_confirmacion():
+    try:
+        confirmacion = input("Desea realizar la operacion? Y/N: ").lower()
+        if confirmacion == "y":
+            return True
+        elif confirmacion == "n":
+            return False
+    except ValueError:
+        print("¡ERROR, ELIGE Y (yes) / N (no)")
+
+
+# Sumar dos numeros.
+def sumar(): # 1
+    try:
+        ingresar_numeros()
+        print("La suma de >>>",numero1,"+",numero2,"<<< es igual a >>>",numero1 + numero2,"<<<")
+    except ValueError:
+        print("¡ERROR, INGRESA UN NUMERO VALIDO")
+
+# Restar dos numeros.
+def resta(): # 2
+    try:
+        ingresar_numeros()
+        print("La resta de >>>", numero1,"-",numero2,"<<< es igual a >>>",numero1 - numero2,"<<<")
+    except ValueError:
+        print("¡ERROR, INGRESA UN NUMERO VALIDO")
+
+# Multiplicar dos numeros.
+def multiplicacion(): # 3
+    try:
+        ingresar_numeros()
+        print("La multiplicacion de >>>", numero1,"*",numero2,"<<< es igual a >>>",numero1 * numero2,"<<<")
+    except ValueError:
+        print("¡ERROR, INGRESA UN NUMERO VALIDO")
+
+# Dividir dos numeros.
+def division(): # 4
+    try:
+        ingresar_numeros()
+        if numero2 == 0:
+            print(">>> ERROR: NO SE PUEDE DIVIDIR ENTRE CERO, SALAME <<<")   
+        else:
+            print("La division entre >>>",numero1, "<<< y >>>", numero2, "<<< es igual a >>>", float(numero1 / numero2),"<<<")
+    except ValueError:
+        print("¡ERROR, INGRESA UN NUMERO VALIDO")
+
+# Pasa el numero de hexadecimal a decimal y de decimal a binario.
+def hex_a_octal(): # 5
+    try:
+        numero_hex = str(input("Ingrese un numero Hexadecimal: "))
+        numero_decimal = int(numero_hex, 16)
+        numero_octal = oct(numero_decimal)
+
+        print("El numero hexadecimal >>>", numero_hex, "<<< es igual a >>>", numero_octal, "<<< en octal.")
+    except ValueError:
+        print("¡ERROR, VALOR HEXADECIMAL INVALIDO!")
+
+# Pasa el numero hexadecimal a decimal y de decimal a binario, imprime solo el binario.
+def hex_a_binario(): # 6
+    try:
+        numero_hex = input("Ingrese un numero Hexadecimal: ")
+        numero_decimal = int(numero_hex, 16)
+        numero_bin = bin(numero_decimal)
+
+        print("El numero hexadecimal >>>",numero_hex, "<<< es igual a >>>",numero_bin, "<<< en binario.")
+    except ValueError:
+        print("¡ERROR, VALOR HEXADECIMAL INVALIDO!")
+
+# Pasa el numero de hexadecimal a decimal, imprime solo el decimal.
+def hex_a_decimal(): # 7
+    try:
+        numero_hex = input("Ingrese un numero Hexadecimal: ")
+        numero_decimal = int(numero_hex, 16)
+
+        print("El numero hexadecimal >>>" ,numero_hex,"<<< es igual a >>>",numero_decimal, "<<< en decimal.")
+    except ValueError:
+        print("¡ERROR, VALOR HEXADECIMAL INVALIDO!")
+
+# Pasa el valor octal a decimal, imprime solo el decimal.
+def oct_a_dec(): # 8
+    try:
+        numero_octal = input("Ingrese un numero Octal: ")
+        numero_dec = int(numero_octal, 8)
+
+        print("El numero octal >>>",numero_octal,"<<< es igual a >>>",numero_dec,"<<< en decimal.")
+    except ValueError:
+        print("¡ERROR, VALOR OCTAL INVALIDO!")
+
+# Pasa el valor octal a binario, imprime solo el binario.
+def oct_a_bin(): # 9
+    try:
+        numero_octal = input("Ingrese un numero Octal: ")
+        numero_dec = int(numero_octal, 8)
+        numero_bin = bin(numero_dec)
+
+        print("El numero octal >>>",numero_octal,"<<< es igual a >>>",numero_bin,"<<< en binario.")
+    except ValueError:
+        print("¡ERROR, VALOR OCTAL INVALIDO!")
+
+# Pasa el valor octal a hexadecimal, imprime solo el hexadecimal.
+def oct_a_hex(): # 10
+    try:
+        numero_octal = input("Ingrese un numero Octal: ")
+        numero_dec = int(numero_octal, 8)
+        numero_hex = hex(numero_dec)
+
+        print("El numero octal >>>",numero_octal,"<<< es igual a >>>",numero_hex,"<<< en hexadecimal.")
+    except ValueError:
+        print("¡ERROR, VALOR OCTAL INVALIDO!")
+
+# Pasa el valor decimal a octal, imprime solo el octal.
+def dec_a_oct(): # 11
+    try:
+        numero_dec = int(input("Ingrese un numero Decimal: "))
+        numero_oct = oct(numero_dec)
+
+        print("El numero Decimal >>>",numero_dec,"<<< es igual a >>>",numero_oct,"<<< en octal.")
+    except ValueError:
+        print("¡ERROR, VALOR DECIMAL INVALIDO!")
+
+# Pasa el valor decimal a binario, imprime solo el binario.
+def dec_a_bin(): # 12
+    try:
+        numero_dec = int(input("Ingrese un numero Decimal: "))
+        numero_bin = bin(numero_dec)
+
+        print("El numero Decimal >>>",numero_dec,"<<< es igual a >>>",numero_bin,"<<< en binario.")
+    except ValueError:
+        print("¡ERROR, VALOR DECIMAL INVALIDO!")
+
+# Pasa el valor decimal a hexadecimal, imprime solo el hexadecimal.
+def dec_a_hex(): # 13
+    try:
+        numero_dec = int(input("Ingrese un numero Decimal: "))
+        numero_hex = hex(numero_dec)
+
+        print("El numero Decimal >>>",numero_dec,"<<< es igual a >>>",numero_hex,"<<< en hexadecimal.")
+    except ValueError:
+        print("¡ERROR, VALOR DECIMAL INVALIDO!")
+
+def logaritmo(): # 14
+    try:
+        log_num = float(input("Ingrese un numero: "))
+        log_base = int(input("Ingrese un numero base: "))
+
+        if log_base <= 0 or log_num <= 0:
+            print("¡ERROR! El numero base y el numero deben ser mayores a cero.")
+            return
+    except ValueError:
+        print("¡ERROR! INGRESA UN NUMERO VALIDO")
+    
+    log_calc = float(math.log(log_num, log_base))
+    print("El logaritmo de >>>",log_num,"<<< en base >>>",log_base,"<<< es igual a >>>",log_calc)
+
+def potencias(): # 15
+    try:
+        base = float(input("Ingrese un numero base: "))
+        exponente = int(input("Ingrese un numero exponente: "))
+        if base <= 0 or exponente <= 0:
+            print("¡ERROR! El numero base y el numero exponente deben ser mayores a cero.")
+            return
+    except ValueError:
+        print("¡ERROR! INGRESA UN NUMERO VALIDO")
+
+    resultado = math.pow(base, exponente)
+    print("La potencia de >>>",base,"<<< elevado a >>>",exponente,"<<< es igual a >>>", resultado)
+
+def raiz_cuadrada(): # 16
+    try:
+        numero_raiz = int(input("Ingrese un numero: "))
+        raiz_cuadrada = math.sqrt(numero_raiz)
+        print("La raiz cuadrada de >>>",numero_raiz,"<<< es igual a >>>",raiz_cuadrada,"<<<")
+    except ValueError:
+        print("¡ERROR! INGRESA UN NUMERO VALIDO")
+
+# El usuario debera elegir una operacion o salir del programa.
+print("""
+      ¡BIENVENIDO A LA CALCULADORA! HECHA POR LUCAS MICARONE
+      """)
+
+numero_contador = -1
+eleccion = 0
+
+def CALCULADORA(numero_contador):
+    while True:
+        print("""
+        Seleccione una operación a realizar:
+
+            OPERADORES MATEMATICOS
+        1) Sumar          2) Restar
+        3) Multiplicar    4) Dividir
+
+            CONVERSOR HEX
+        5) Hexadecimal a Octal
+        6) Hexadecimal a Binario
+        7) Hexadecimal a Decimal
+
+            CONVERSOR OCT
+        8) Octal a Decimal
+        9) Octal a Binario
+        10) Octal a Hexadecimal
+
+            CONVERSOR DEC
+        11) Decimal a Octal
+        12) Decimal a Binario
+        13) Decimal a Hexadecimal
+              
+                EXTRA
+        14) Logaritmo
+        15) Potencias
+        16) Raiz cuadrada
+
+            FINALIZAR SESIÓN 
+           17) Cerrar sesión
+        """)
+        numero_contador = numero_contador + 1 # Cuenta el numero de veces que se usó la calculadora.
+        eleccion = int(input()) # El usuario tiene que elegir una opcion desde 1 al 17.
+
+        if eleccion <= 0 or eleccion >=18: # Si el usuario elige una opcion invalida, este imprimira el siguiente mensaje.
+            print("¡ERROR! ELIGE UNA OPCION VALIDA")
+        elif eleccion == 17:
+            if salida_confirmacion():
+                if numero_contador == 1:
+                    print("¡ADIOS! Gracias por usar la calculadora", numero_contador, "vez :)")
+                elif numero_contador == 0:
+                    print("¡ADIOS!")
+                else:
+                    print("¡ADIOS! Gracias por usar la calculadora", numero_contador, "veces :)")
+                break
+        elif eleccion == 1:
+            if usuario_confirmacion():
+                sumar()
+        elif eleccion == 2:
+            if usuario_confirmacion():
+                resta()
+        elif eleccion == 3:
+            if usuario_confirmacion():
+                multiplicacion()
+        elif eleccion == 4:
+            if usuario_confirmacion():
+                division()
+        elif eleccion == 5:
+            if usuario_confirmacion():
+                hex_a_octal()
+        elif eleccion == 6:
+            if usuario_confirmacion():
+                hex_a_binario()
+        elif eleccion == 7:
+            if usuario_confirmacion():
+                hex_a_decimal()
+        elif eleccion == 8:
+            if usuario_confirmacion():
+                oct_a_dec()
+        elif eleccion == 9:
+            if usuario_confirmacion():
+                oct_a_bin()
+        elif eleccion == 10:
+            if usuario_confirmacion():
+                oct_a_hex()
+        elif eleccion == 11:
+            if usuario_confirmacion():
+                dec_a_oct()
+        elif eleccion == 12:
+            if usuario_confirmacion():
+                dec_a_bin()
+        elif eleccion == 13:
+            if usuario_confirmacion():
+                dec_a_hex()
+        elif eleccion == 14:
+            if usuario_confirmacion():
+                logaritmo()
+        elif eleccion == 15:
+            if usuario_confirmacion():
+                potencias()
+        elif eleccion == 16:
+            if usuario_confirmacion():
+                raiz_cuadrada()
+CALCULADORA(numero_contador)
