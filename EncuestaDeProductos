@@ -1,0 +1,100 @@
+def preguntas():
+    global edad, sexo, conocen, consumen, vecesSemana, recomiendan
+    while True:
+        try:
+            edad = int(input("""
+                            INGRESA TU EDAD: """))
+            if edad not in range (17,130):
+                raise ValueError("EDAD INVALIDA")
+            sexo = input("""
+                            INGRESA TU SEXO
+                    M(masculino) - F(femenino) - O(otro): """).lower()
+            if sexo not in ['m', 'f', 'o']:
+                raise ValueError("Sexo no valido. Por favor, ingresa 'M', 'F' o 'O'.")
+            conocen = input("""
+                        ¿CONOCES EL PRODUCTO? Si/No """).lower()
+            if conocen not in ['si', 'no']:
+                raise ValueError("Respuesta no valida. Por favor, responde 'Si' o 'No'.")
+            consumen = input("""
+                        ¿LO CONSUMES? Si/No """).lower()
+            if consumen not in ['si', 'no']:
+                raise ValueError("Respuesta no valida. Por favor, responde 'Si' o 'No'.")
+            vecesSemana = int(input("""
+                        ¿CUÁNTAS VECES POR SEMANA? """))
+            recomiendan = input("""
+                        ¿LO RECOMENDARIAS? Si/No """).lower()
+            if recomiendan not in ['si', 'no']:
+                raise ValueError("Respuesta no valida. Por favor, responde 'Si' o 'No'.")
+            
+            return edad, sexo, conocen, consumen, vecesSemana, recomiendan
+        except ValueError as e:
+            print("ERROR:", e)
+
+def main():
+    encuestados = 0
+
+    totalFemenino = 0
+    totalMasculino = 0
+    totalOtro = 0
+    totalMayores = 0
+
+    sumaConocen = 0
+    sumaConsumen = 0
+    sumaRecomiendan = 0
+            
+    promedioVecesSemanaMasculino = 0
+    promedioVecesSemanaFemenino = 0
+    promedioVecesSemanaOtro = 0
+    promedioVecesSemanaMayores = 0
+
+    while encuestados < 3:
+        encuestados += 1
+        
+        print("Encuestado numero", encuestados)
+        preguntas()
+
+        # Sumar los datos para mayores.
+        if edad >= 18:
+            totalMayores += 1
+            promedioVecesSemanaMayores += vecesSemana
+
+        # Sumar los datos por sexo.
+        if sexo == "m":
+            totalMasculino += 1
+            promedioVecesSemanaMasculino += vecesSemana
+        elif sexo == "f":
+            totalFemenino += 1
+            promedioVecesSemanaFemenino += vecesSemana
+        else:
+            totalOtro +=1
+            promedioVecesSemanaOtro += vecesSemana
+
+        # Sumar datos si conocen.
+        if conocen == "si":
+            sumaConocen += 1
+
+        # Sumar datos si consumen.
+        if consumen == "si":
+            sumaConsumen += 1
+
+        # Sumar datos si recomiendan.
+        if recomiendan == "si":
+            sumaRecomiendan += 1
+
+
+    # Calcular promedios
+    promedioVecesSemanaFemenino /= totalFemenino if totalFemenino != 0 else 1
+    promedioVecesSemanaMasculino /= totalMasculino if totalMasculino != 0 else 1
+    promedioVecesSemanaOtro /= totalOtro if totalOtro != 0 else 1
+    promedioVecesSemanaMayores /= totalMayores if totalMayores != 0 else 1
+
+    # Mostrar resultados
+    print("\nResultados:")
+    print("Promedio de veces a la semana consumido por mujeres:", promedioVecesSemanaFemenino)
+    print("Promedio de veces a la semana consumido por hombres:", promedioVecesSemanaMasculino)
+    print("Promedio de veces a la semana consumido por otros:", promedioVecesSemanaOtro)
+    print("Promedio de veces a la semana consumido por mayores de edad:", promedioVecesSemanaMayores)
+    print("Porcentaje de personas que conocen el producto:", (sumaConocen / encuestados) * 100)
+    print("Porcentaje de personas que consumen el producto:", (sumaConsumen/ encuestados) * 100)
+    print("Porcentaje de personas que recomiendan el producto:", (sumaRecomiendan / encuestados) * 100)
+main()
